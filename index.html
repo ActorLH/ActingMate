@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SceneMate</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="loginPage" class="login-page"><div class="login-card">
+  <div class="logo">🎬</div><h1>SceneMate</h1><p class="muted center">Practice. Perform. Improve.</p>
+  <div class="tabs"><button id="loginTab" class="tab active">Log In</button><button id="signupTab" class="tab">Sign Up</button></div>
+  <div id="authMessage" class="message"></div><div id="authForm"></div>
+  <p class="switch center"><span id="switchText"></span> <button id="switchBtn"></button></p>
+</div></div>
+
+<div id="app" class="hidden"><aside class="sidebar">
+  <div class="brand"><span>🎬</span> SceneMate</div>
+  <nav>
+    <button class="nav active" data-section="home">🏠 Home</button><button class="nav" data-section="profile">👤 Profile</button>
+    <button class="nav" data-section="reader">🎭 AI Scene Reader</button><button class="nav" data-section="challenge">🎯 Acting Challenge</button>
+    <button class="nav" data-section="scripts">📖 My Scripts</button><button class="nav" data-section="lines">🎙️ Line Practice</button>
+    <button class="nav" data-section="performances">🎥 Performances</button><button class="nav" data-section="progress">📈 Progress</button><button class="nav" data-section="favorites">⭐ Favorites</button>
+  </nav><button id="logout" class="logout">↪ Log Out</button>
+</aside>
+<main class="main">
+<section id="home" class="section active"><span class="eyebrow">SCENEMATE</span><h1>Practice. Perform. Improve. 🎬</h1><p class="subtitle">Everything you need to practice acting, prepare scenes, and build your skills.</p>
+<h2>What do you want to do?</h2><div class="grid four">
+<div class="card action" data-go="reader">🎭<h3>Practice a Scene</h3><p>Practice with an AI scene reader.</p></div><div class="card action" data-go="lines">🎙️<h3>Practice Lines</h3><p>Rehearse your lines with other characters.</p></div><div class="card action" data-go="scripts">📖<h3>My Scripts</h3><p>Keep scenes and monologues organized.</p></div><div class="card action" data-go="performances">🎥<h3>Record a Performance</h3><p>Keep track of your takes.</p></div></div>
+<div class="banner"><div><span class="tag">ACTING CHALLENGE</span><h2>Emotional Switch</h2><p>Perform the same short scene three different ways.</p><button class="primary" data-go="challenge">Try It →</button></div><div class="bigemoji">🎬</div></div>
+</section>
+
+<section id="profile" class="section"><span class="eyebrow">YOUR PROFILE</span><h1>Your Profile 👤</h1><p class="subtitle">Personalize your SceneMate profile.</p><div class="profile-grid">
+<div class="card center"><div class="photo-wrap"><img id="profilePhoto" alt="Profile picture"><div id="profileInitial">🎭</div></div><button id="cameraBtn" class="primary wide">📷 Take Profile Picture</button><button id="uploadBtn" class="secondary wide">Upload Picture</button><input id="photoFile" type="file" accept="image/*" hidden><p id="photoStatus" class="muted small">Profile pictures are saved to Supabase Storage.</p></div>
+<div class="card"><h2>Profile Information</h2><label>Name</label><input id="profileName" placeholder="Your name"><label>Bio</label><textarea id="profileBio" placeholder="Tell people a little about yourself..."></textarea><label>Acting Experience</label><textarea id="profileExperience" placeholder="School plays, theater, film, etc."></textarea><button id="saveProfile" class="primary">Save Profile</button><p id="profileStatus" class="message"></p></div>
+</div></section>
+
+<section id="reader" class="section"><span class="eyebrow">AI SCENE READER</span><h1>Practice Your Sides 🎭</h1><p class="subtitle">Paste your sides below and identify the characters.</p><div class="card"><textarea id="scriptInput" class="script" placeholder="OLIVER\nThank you grandma.\n\nGRANDMA\nOf course I came."></textarea><button id="analyze" class="primary">Analyze Scene</button><button id="clearScene" class="secondary">Clear</button></div><div class="card"><h2>Characters Found</h2><div id="characters" class="status">Analyze your scene to find characters.</div><label>Your Character</label><select id="playerCharacter"><option>Select a character</option></select><button id="readerStart" class="primary">🎙️ Start AI Reader</button><button id="readerStop" class="secondary">Stop</button><div id="readerStatus" class="status">AI Reader is ready.</div></div></section>
+
+<section id="challenge" class="section"><span class="eyebrow">SCENEMATE CHALLENGE</span><h1>Acting Challenge 🎭</h1><p class="subtitle">Change the emotion without changing the words.</p><div class="card challenge"><span class="tag">CHALLENGE 01</span><h2>Emotional Switch</h2><p>Say the same scene three different ways.</p><div class="grid three"><button class="emotion" data-emotion="Happy">😊<b>Happy</b><small>Bright and excited</small></button><button class="emotion" data-emotion="Angry">😠<b>Angry</b><small>Powerful and intense</small></button><button class="emotion" data-emotion="Sad">😢<b>Sad</b><small>Quiet and serious</small></button></div><div class="scene"><b>OLIVER</b><p>I can't believe you actually came.</p><b>GRANDMA</b><p>Of course I came. I promised I would.</p></div><div id="challengeStatus" class="status">🎭 Choose an emotion to begin.</div><button id="challengeStart" class="primary">Start Challenge →</button><button id="challengeStop" class="secondary">Stop</button></div></section>
+
+<section id="scripts" class="section"><span class="eyebrow">YOUR LIBRARY</span><h1>My Scripts 📖</h1><p class="subtitle">Your saved scenes and monologues will appear here.</p><div class="empty">📖<br>No scripts saved yet.</div></section>
+<section id="lines" class="section"><span class="eyebrow">PRACTICE</span><h1>Line Practice 🎙️</h1><p class="subtitle">Practice your lines while SceneMate reads the other characters.</p><div class="empty">🎙️<br>Your line-practice sessions will appear here.</div></section>
+<section id="performances" class="section"><span class="eyebrow">PERFORMANCES</span><h1>Performances 🎥</h1><p class="subtitle">Keep track of your performances and takes.</p><div class="empty">🎥<br>No performances saved yet.</div></section>
+<section id="progress" class="section"><span class="eyebrow">YOUR PROGRESS</span><h1>Progress 📈</h1><div class="grid three"><div class="stat">0<small>Sessions</small></div><div class="stat">0<small>Day Streak</small></div><div class="stat">0<small>Challenges</small></div></div></section>
+<section id="favorites" class="section"><span class="eyebrow">YOUR FAVORITES</span><h1>Favorites ⭐</h1><p class="subtitle">Your favorite scenes and exercises will appear here.</p><div class="empty">⭐<br>Nothing favorited yet.</div></section>
+</main></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="script.js"></script>
+</body></html>
