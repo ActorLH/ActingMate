@@ -1,47 +1,238 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ActingMate</title><link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0912">
+  <title>ActingMate — Practice. Perform. Improve.</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="loginPage" class="login-page"><div class="login-card">
-  <div class="logo">🎬</div><h1>ActingMate</h1><p class="muted center">Practice. Perform. Improve.</p>
-  <div class="tabs"><button id="loginTab" class="tab active">Log In</button><button id="signupTab" class="tab">Sign Up</button></div>
-  <div id="authMessage" class="message"></div><div id="authForm"></div>
-  <p class="switch center"><span id="switchText"></span> <button id="switchBtn"></button></p>
-</div></div>
+  <div id="loginPage" class="login-page">
+    <div class="login-card">
+      <div class="logo" aria-hidden="true">🎬</div>
+      <h1>ActingMate</h1>
+      <p class="muted center">Practice. Perform. Improve.</p>
+      <div class="tabs" role="tablist" aria-label="Account access">
+        <button id="loginTab" class="tab active" type="button">Log In</button>
+        <button id="signupTab" class="tab" type="button">Sign Up</button>
+      </div>
+      <div id="authMessage" class="message" role="status"></div>
+      <div id="authForm"></div>
+      <p class="switch center"><span id="switchText"></span> <button id="switchBtn" type="button"></button></p>
+    </div>
+  </div>
 
-<div id="app" class="hidden"><aside class="sidebar">
-  <div class="brand"><span>🎬</span> ActingMate</div>
-  <nav>
-    <button class="nav active" data-section="home">🏠 Home</button><button class="nav" data-section="profile">👤 Profile</button>
-    <button class="nav" data-section="reader">🎭 AI Scene Reader</button><button class="nav" data-section="challenge">🎯 Acting Challenge</button>
-    <button class="nav" data-section="scripts">📖 My Scripts</button><button class="nav" data-section="lines">🎙️ Line Practice</button>
-    <button class="nav" data-section="performances">🎥 Performances</button><button class="nav" data-section="progress">📈 Progress</button><button class="nav" data-section="favorites">⭐ Favorites</button>
-  </nav><button id="logout" class="logout">↪ Log Out</button>
-</aside>
-<main class="main">
-<section id="home" class="section active"><span class="eyebrow">ACTINGMATE</span><h1>Practice. Perform. Improve. 🎬</h1><p class="subtitle">Everything you need to practice acting, prepare scenes, and build your skills.</p>
-<h2>What do you want to do?</h2><div class="grid four">
-<div class="card action" data-go="reader">🎭<h3>Practice a Scene</h3><p>Practice with an AI scene reader.</p></div><div class="card action" data-go="lines">🎙️<h3>Practice Lines</h3><p>Rehearse your lines with other characters.</p></div><div class="card action" data-go="scripts">📖<h3>My Scripts</h3><p>Keep scenes and monologues organized.</p></div><div class="card action" data-go="performances">🎥<h3>Record a Performance</h3><p>Keep track of your takes.</p></div></div>
-<div class="banner"><div><span class="tag">ACTING CHALLENGE</span><h2>Emotional Switch</h2><p>Perform the same short scene three different ways.</p><button class="primary" data-go="challenge">Try It →</button></div><div class="bigemoji">🎬</div></div>
-</section>
+  <div id="app" class="hidden">
+    <aside class="sidebar">
+      <div class="brand"><span aria-hidden="true">🎬</span> ActingMate</div>
+      <nav aria-label="Main navigation">
+        <button class="nav active" data-section="home" type="button">🏠 <span>Home</span></button>
+        <button class="nav" data-section="profile" type="button">👤 <span>Profile</span></button>
+        <button class="nav" data-section="reader" type="button">🎭 <span>AI Scene Reader</span></button>
+        <button class="nav" data-section="challenge" type="button">🎯 <span>Acting Challenge</span></button>
+        <button class="nav" data-section="scripts" type="button">📖 <span>My Scripts</span></button>
+        <button class="nav" data-section="lines" type="button">🎙️ <span>Line Practice</span></button>
+        <button class="nav" data-section="performances" type="button">🎥 <span>Performances</span></button>
+        <button class="nav" data-section="progress" type="button">📈 <span>Progress</span></button>
+        <button class="nav" data-section="favorites" type="button">⭐ <span>Favorites</span></button>
+      </nav>
+      <div class="sidebar-note"><strong>Your practice space</strong><span>Saved items stay on this device for your account.</span></div>
+      <button id="logout" class="logout" type="button">↪ <span>Log Out</span></button>
+    </aside>
 
-<section id="profile" class="section"><span class="eyebrow">YOUR PROFILE</span><h1>Your Profile 👤</h1><p class="subtitle">Personalize your ActingMate profile.</p><div class="profile-grid">
-<div class="card center"><div class="photo-wrap"><img id="profilePhoto" alt="Profile picture"><div id="profileInitial">🎭</div></div><button id="cameraBtn" class="primary wide">📷 Take Profile Picture</button><button id="uploadBtn" class="secondary wide">Upload Picture</button><input id="photoFile" type="file" accept="image/*" hidden><p id="photoStatus" class="muted small">Profile pictures are saved to Supabase Storage.</p></div>
-<div class="card"><h2>Profile Information</h2><label>Name</label><input id="profileName" placeholder="Your name"><label>Bio</label><textarea id="profileBio" placeholder="Tell people a little about yourself..."></textarea><label>Acting Experience</label><textarea id="profileExperience" placeholder="School plays, theater, film, etc."></textarea><button id="saveProfile" class="primary">Save Profile</button><p id="profileStatus" class="message"></p></div>
-</div></section>
+    <main class="main">
+      <div class="mobile-header"><div class="brand"><span aria-hidden="true">🎬</span> ActingMate</div></div>
 
-<section id="reader" class="section"><span class="eyebrow">AI SCENE READER</span><h1>Practice Your Sides 🎭</h1><p class="subtitle">Paste your sides below and identify the characters.</p><div class="card"><textarea id="scriptInput" class="script" placeholder="OLIVER\nThank you grandma.\n\nGRANDMA\nOf course I came."></textarea><button id="analyze" class="primary">Analyze Scene</button><button id="clearScene" class="secondary">Clear</button></div><div class="card"><h2>Characters Found</h2><div id="characters" class="status">Analyze your scene to find characters.</div><label>Your Character</label><select id="playerCharacter"><option>Select a character</option></select><button id="readerStart" class="primary">🎙️ Start AI Reader</button><button id="readerStop" class="secondary">Stop</button><div id="readerStatus" class="status">AI Reader is ready.</div></div></section>
+      <section id="home" class="section active">
+        <span class="eyebrow">ACTINGMATE</span>
+        <h1>Practice. Perform. Improve. 🎬</h1>
+        <p class="subtitle">A focused space to rehearse scenes, organize scripts, and build your acting habits.</p>
 
-<section id="challenge" class="section"><span class="eyebrow">ACTINGMATE CHALLENGE</span><h1>Acting Challenge 🎭</h1><p class="subtitle">Change the emotion without changing the words.</p><div class="card challenge"><span class="tag">CHALLENGE 01</span><h2>Emotional Switch</h2><p>Say the same scene three different ways.</p><div class="grid three"><button class="emotion" data-emotion="Happy">😊<b>Happy</b><small>Bright and excited</small></button><button class="emotion" data-emotion="Angry">😠<b>Angry</b><small>Powerful and intense</small></button><button class="emotion" data-emotion="Sad">😢<b>Sad</b><small>Quiet and serious</small></button></div><div class="scene"><b>OLIVER</b><p>I can't believe you actually came.</p><b>GRANDMA</b><p>Of course I came. I promised I would.</p></div><div id="challengeStatus" class="status">🎭 Choose an emotion to begin.</div><button id="challengeStart" class="primary">Start Challenge →</button><button id="challengeStop" class="secondary">Stop</button></div></section>
+        <div class="home-overview" aria-label="Practice overview">
+          <div class="mini-stat"><strong id="homeSessions">0</strong><span>Sessions</span></div>
+          <div class="mini-stat"><strong id="homeStreak">0</strong><span>Day streak</span></div>
+          <div class="mini-stat"><strong id="homeScripts">0</strong><span>Saved scripts</span></div>
+          <div class="mini-stat"><strong id="homeFavorites">0</strong><span>Favorites</span></div>
+        </div>
 
-<section id="scripts" class="section"><span class="eyebrow">YOUR LIBRARY</span><h1>My Scripts 📖</h1><p class="subtitle">Your saved scenes and monologues will appear here.</p><div class="empty">📖<br>No scripts saved yet.</div></section>
-<section id="lines" class="section"><span class="eyebrow">PRACTICE</span><h1>Line Practice 🎙️</h1><p class="subtitle">Practice your lines while ActingMaye reads the other characters.</p><div class="empty">🎙️<br>Your line-practice sessions will appear here.</div></section>
-<section id="performances" class="section"><span class="eyebrow">PERFORMANCES</span><h1>Performances 🎥</h1><p class="subtitle">Keep track of your performances and takes.</p><div class="empty">🎥<br>No performances saved yet.</div></section>
-<section id="progress" class="section"><span class="eyebrow">YOUR PROGRESS</span><h1>Progress 📈</h1><div class="grid three"><div class="stat">0<small>Sessions</small></div><div class="stat">0<small>Day Streak</small></div><div class="stat">0<small>Challenges</small></div></div></section>
-<section id="favorites" class="section"><span class="eyebrow">YOUR FAVORITES</span><h1>Favorites ⭐</h1><p class="subtitle">Your favorite scenes and exercises will appear here.</p><div class="empty">⭐<br>Nothing favorited yet.</div></section>
-</main></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="script.js"></script>
-</body></html>
+        <h2>What do you want to do?</h2>
+        <div class="grid four">
+          <button class="card action" data-go="reader" type="button"><span class="action-icon">🎭</span><h3>Practice a Scene</h3><p>Paste your sides and rehearse with a speaking reader.</p></button>
+          <button class="card action" data-go="lines" type="button"><span class="action-icon">🎙️</span><h3>Practice Lines</h3><p>Work through cues one line at a time.</p></button>
+          <button class="card action" data-go="scripts" type="button"><span class="action-icon">📖</span><h3>My Scripts</h3><p>Keep scenes and monologues organized.</p></button>
+          <button class="card action" data-go="performances" type="button"><span class="action-icon">🎥</span><h3>Record a Performance</h3><p>Log takes and optionally record one in your browser.</p></button>
+        </div>
+
+        <div class="banner">
+          <div><span class="tag">ACTING CHALLENGE</span><h2>Emotional Switch</h2><p>Perform the same short scene three different ways.</p><button class="primary" data-go="challenge" type="button">Try It →</button></div>
+          <div class="bigemoji" aria-hidden="true">🎬</div>
+        </div>
+
+        <div class="card recent-card">
+          <div class="section-heading"><div><span class="tag">KEEP GOING</span><h2>Recent practice</h2></div><button class="text-button" data-go="progress" type="button">View progress →</button></div>
+          <div id="homeRecent" class="recent-list"></div>
+        </div>
+      </section>
+
+      <section id="profile" class="section">
+        <span class="eyebrow">YOUR PROFILE</span>
+        <h1>Your Profile 👤</h1>
+        <p class="subtitle">Personalize your ActingMate profile.</p>
+        <div class="profile-grid">
+          <div class="card center">
+            <div class="photo-wrap"><img id="profilePhoto" alt="Profile picture"><div id="profileInitial">🎭</div></div>
+            <button id="cameraBtn" class="primary wide" type="button">📷 Take Profile Picture</button>
+            <button id="uploadBtn" class="secondary wide" type="button">Upload Picture</button>
+            <input id="photoFile" type="file" accept="image/*" hidden>
+            <p id="photoStatus" class="muted small">Profile pictures are saved to your account.</p>
+          </div>
+          <div class="card">
+            <h2>Profile Information</h2>
+            <label for="profileName">Name</label><input id="profileName" placeholder="Your name" autocomplete="name">
+            <label for="profileBio">Bio</label><textarea id="profileBio" placeholder="Tell people a little about yourself..."></textarea>
+            <label for="profileExperience">Acting Experience</label><textarea id="profileExperience" placeholder="School plays, theater, film, etc."></textarea>
+            <button id="saveProfile" class="primary" type="button">Save Profile</button><p id="profileStatus" class="message" role="status"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="reader" class="section">
+        <span class="eyebrow">AI SCENE READER</span>
+        <h1>Practice Your Sides 🎭</h1>
+        <p class="subtitle">Paste a scene, identify the characters, and let ActingMate read the other parts aloud.</p>
+        <div class="card">
+          <div class="form-grid two">
+            <div><label for="scriptTitle">Scene title</label><input id="scriptTitle" placeholder="A title for this scene"></div>
+            <div class="field-note"><span class="tag">FORMAT TIP</span><p>Put each character name on its own line in ALL CAPS.</p></div>
+          </div>
+          <label for="scriptInput">Your sides</label>
+          <textarea id="scriptInput" class="script" placeholder="OLIVER
+Thank you for coming.
+
+GRANDMA
+Of course I came. I promised I would."></textarea>
+          <button id="analyze" class="primary" type="button">Analyze Scene</button>
+          <button id="clearScene" class="secondary" type="button">Clear</button>
+          <button id="saveScript" class="secondary" type="button">♡ Save Script</button>
+          <p id="scriptSaveStatus" class="message" role="status"></p>
+        </div>
+        <div class="card">
+          <h2>Characters Found</h2>
+          <div id="characters" class="status">Analyze your scene to find characters.</div>
+          <label for="playerCharacter">Your Character</label>
+          <select id="playerCharacter"><option>Select a character</option></select>
+          <button id="readerStart" class="primary" type="button">🎙️ Start AI Reader</button>
+          <button id="readerStop" class="secondary" type="button">Stop</button>
+          <div id="readerStatus" class="status" role="status">AI Reader is ready.</div>
+          <p class="muted small reader-hint">The reader uses your browser microphone and speech tools. Headphones can help prevent the reader from hearing its own voice.</p>
+        </div>
+      </section>
+
+      <section id="challenge" class="section">
+        <span class="eyebrow">ACTINGMATE CHALLENGE</span>
+        <h1>Acting Challenge 🎭</h1>
+        <p class="subtitle">Change the emotion without changing the words.</p>
+        <div class="card challenge">
+          <div class="section-heading"><div><span class="tag">CHALLENGE 01</span><h2>Emotional Switch</h2></div><button id="favoriteChallenge" class="icon-button" type="button" aria-label="Favorite Emotional Switch">☆</button></div>
+          <p>Say the same short scene three different ways. Choose an emotion, then perform when the microphone starts listening.</p>
+          <div class="grid three">
+            <button class="emotion" data-emotion="Happy" type="button">😊<b>Happy</b><small>Bright and excited</small></button>
+            <button class="emotion" data-emotion="Angry" type="button">😠<b>Angry</b><small>Powerful and intense</small></button>
+            <button class="emotion" data-emotion="Sad" type="button">😢<b>Sad</b><small>Quiet and serious</small></button>
+          </div>
+          <div class="scene"><b>OLIVER</b><p>I can't believe you actually came.</p><b>GRANDMA</b><p>Of course I came. I promised I would.</p></div>
+          <div id="challengeStatus" class="status" role="status">🎭 Choose an emotion to begin.</div>
+          <button id="challengeStart" class="primary" type="button">Start Challenge →</button>
+          <button id="challengeStop" class="secondary" type="button">Stop</button>
+          <p id="challengeCompletion" class="muted small"></p>
+        </div>
+      </section>
+
+      <section id="scripts" class="section">
+        <span class="eyebrow">YOUR LIBRARY</span>
+        <div class="section-heading page-heading"><div><h1>My Scripts 📖</h1><p class="subtitle">Save scenes and monologues so they are ready whenever you want to rehearse.</p></div><button class="primary" data-go="reader" type="button">＋ New Script</button></div>
+        <div id="scriptsList" class="stack-list"></div>
+      </section>
+
+      <section id="lines" class="section">
+        <span class="eyebrow">PRACTICE</span>
+        <h1>Line Practice 🎙️</h1>
+        <p class="subtitle">Choose a saved scene, select your character, and work through each cue at your pace.</p>
+        <div class="card">
+          <div class="form-grid two">
+            <div><label for="lineScriptSelect">Scene</label><select id="lineScriptSelect"><option value="">Choose a saved scene</option></select></div>
+            <div><label for="lineCharacterSelect">Your Character</label><select id="lineCharacterSelect"><option value="">Choose a scene first</option></select></div>
+          </div>
+          <button id="lineLoad" class="primary" type="button">Load Practice</button>
+          <p id="lineSetupStatus" class="message" role="status"></p>
+        </div>
+        <div id="lineWorkspace" class="card hidden">
+          <div class="practice-top"><div><span class="tag">LINE PRACTICE</span><h2 id="linePracticeTitle">Scene</h2></div><div id="lineProgress" class="progress-pill">Line 1</div></div>
+          <div class="cue-grid">
+            <div class="cue-card"><span class="tag">CUE</span><h3 id="lineCueCharacter">Ready</h3><p id="lineCueText">Your cue will appear here.</p><button id="lineHearCue" class="secondary" type="button">🔊 Hear Cue</button></div>
+            <div class="your-line-card"><span class="tag">YOUR LINE</span><h3 id="lineYourCharacter">Your character</h3><p id="lineYourText">Your next line will appear here.</p></div>
+          </div>
+          <div id="lineStatus" class="status" role="status">Press “I Said It” after you rehearse the line.</div>
+          <button id="lineNext" class="primary" type="button">I Said It →</button>
+          <button id="lineListen" class="secondary" type="button">🎙️ Listen for Me</button>
+          <button id="lineFinish" class="secondary" type="button">Finish Session</button>
+          <button id="lineExit" class="text-button" type="button">Choose another scene</button>
+        </div>
+      </section>
+
+      <section id="performances" class="section">
+        <span class="eyebrow">PERFORMANCES</span>
+        <h1>Performance Journal 🎥</h1>
+        <p class="subtitle">Keep a simple record of takes, notes, and what you want to try next.</p>
+        <div class="card">
+          <h2>Log a take</h2>
+          <div class="form-grid two">
+            <div><label for="performanceTitle">Take title</label><input id="performanceTitle" placeholder="Example: Monologue — Take 1"></div>
+            <div><label for="performanceEmotion">Focus</label><select id="performanceEmotion"><option>General practice</option><option>Happy</option><option>Angry</option><option>Sad</option><option>Brave</option><option>Quiet</option></select></div>
+          </div>
+          <label for="performanceNotes">Notes</label><textarea id="performanceNotes" placeholder="What worked? What will you try next time?"></textarea>
+          <button id="performanceRecord" class="secondary" type="button">🎥 Record a Take</button><button id="performanceStop" class="secondary hidden" type="button">Stop Recording</button>
+          <video id="performancePreview" class="performance-preview hidden" controls playsinline></video>
+          <a id="performanceDownload" class="download-link hidden" download="actingmate-take.webm">Download recorded take</a>
+          <button id="savePerformance" class="primary" type="button">Save Performance</button>
+          <p id="performanceStatus" class="message" role="status"></p>
+        </div>
+        <div id="performancesList" class="stack-list"></div>
+      </section>
+
+      <section id="progress" class="section">
+        <span class="eyebrow">YOUR PROGRESS</span>
+        <h1>Progress 📈</h1>
+        <p class="subtitle">Small, repeatable sessions add up.</p>
+        <div class="grid four progress-stats">
+          <div class="stat"><strong id="progressSessions">0</strong><small>Sessions</small></div>
+          <div class="stat"><strong id="progressStreak">0</strong><small>Day streak</small></div>
+          <div class="stat"><strong id="progressChallenges">0</strong><small>Challenges</small></div>
+          <div class="stat"><strong id="progressScripts">0</strong><small>Saved scripts</small></div>
+        </div>
+        <div class="card goal-card"><div class="section-heading"><div><span class="tag">WEEKLY GOAL</span><h2>Three practice sessions</h2></div><strong id="goalCount">0 / 3</strong></div><div class="progress-bar"><i id="progressBar"></i></div><p id="progressMessage" class="muted small"></p></div>
+        <div class="card"><div class="section-heading"><div><span class="tag">ACTIVITY</span><h2>Recent activity</h2></div></div><div id="activityList" class="recent-list"></div></div>
+      </section>
+
+      <section id="favorites" class="section">
+        <span class="eyebrow">YOUR FAVORITES</span>
+        <h1>Favorites ⭐</h1>
+        <p class="subtitle">Keep the scenes and exercises you want to return to close at hand.</p>
+        <div id="favoritesList" class="stack-list"></div>
+      </section>
+    </main>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <button data-section="home" type="button">🏠<b>Home</b></button>
+      <button data-section="reader" type="button">🎭<b>Practice</b></button>
+      <button data-section="scripts" type="button">📖<b>Scripts</b></button>
+      <button data-section="performances" type="button">🎥<b>Takes</b></button>
+      <button data-section="progress" type="button">📈<b>Progress</b></button>
+    </nav>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
